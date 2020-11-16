@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+        integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="text">Pomodoro Timer</h2>
+        <div class="containerTimer">
+            <svg>
+                <circle cx="140" cy="140" r="140" />
+            </svg>
+            <div class="timer">
+                <h2>25:00</h2>
+                <i class="far fa-bell"></i>
+            </div>
+        </div>
+        <section class="panel">
+            <div class="starter">Start</div>
+        </section>
+        <div class="buttons">
+            <button><i class="fas fa-tasks"></i></button>
+            <button class="reset"><i class="fas fa-trash"></i></button>
+            <button class="btnSettings"><i class="fas fa-cogs"></i></button>
+        </div>
+    </div>
+    <section class="setting">
+        <div>
+            <h1>Długość pracy</h1>
+            <div class="containerset">
+                <button data-work="1">20 minut</button>
+                <button data-work="25">25 minut</button>
+                <button data-work="30">30 minut</button>
+            </div>
+        </div>
+        <div>
+            <h1>Długość przerwy</h1>
+            <div class="containerset">
+                <button data-breake="3">3 minuty</button>
+                <button data-breake="5">5 minut</button>
+                <button data-breake="7">7 minut</button>
+            </div>
+        </div>
+        <div>
+            <h1>Wybór koloru tła</h1>
+            <div class="containerset colors">
+                <button></button>
+                <button></button>
+                <button></button>
+            </div>
+        </div>
+        <i class="far fa-times-circle closeSet"></i>
+        <!-- ustawienia przez btn - jak dlugi bedzie czas pracy, jak dluga przerwa, wybor kolorystyczny -->
+    </section>
+    <script src="main.js"></script>
+</body>
+
+</html>
