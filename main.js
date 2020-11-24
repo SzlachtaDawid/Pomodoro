@@ -13,6 +13,7 @@ let timeWork = 1
 let timeBreake = 1
 let breake = false;
 let flaga = false
+let flaga2 = false
 let active
 let idI;
 let bar
@@ -21,7 +22,7 @@ let timeStarter = true
 
 
 
-// 1 , timer , 3 (praca) - 4 , timer , 6 (przerwa) 
+// 1 , timer , 3 (praca) - 4 , timer , 6 (przerwa)
 
 
 // FUNKCJA POMODORO TIMER (STARTOWANIE)(PRACA)(PRZERWA)
@@ -37,7 +38,7 @@ const startwatch = () => {
         i.style.display = 'none';
         svgCircle.style.strokeDashoffset = 880
         svgCircle.style.animation = `colorWork ${(timeWork * 60) + 's'} linear both`;
-        if (flaga) {
+        if (flaga2) {
             divBreake.remove()
         }
         idI = setInterval(start, 100);
@@ -95,6 +96,7 @@ const start = () => {
             document.querySelector('.panel').appendChild(divBreake)
             divBreake.classList.add("add5")
             divBreake.textContent = 'Dodatkowe 5 minut przerwy'
+            flaga2 = true
         }
         clearInterval(idI)
         active = true
@@ -117,6 +119,7 @@ const resetf = () => {
     console.log('Reset')
     timer.textContent = `${timeWork}:00`;
     starter.textContent = 'Start';
+    i.style.display = 'none';
     bar3 = 880
     svgCircle.style.strokeDashoffset = bar3
     svgCircle.style.animation = `colorWork2 ${(timeWork * 60) + 's'} linear both`;
@@ -124,7 +127,7 @@ const resetf = () => {
     active = false;
     breake = false
     clearInterval(idI)
-    if (flaga) {
+    if (flaga2) {
         divBreake.remove()
     }
 }
@@ -148,6 +151,7 @@ const breake5min = () => {
         bar3 = 880
         flaga = false
         breake = true
+        flaga2 = false
         divBreake.remove()
         idI = setInterval(start, 100);
     }
@@ -156,10 +160,8 @@ const breake5min = () => {
 // PRZERWA DODATKOWA KONIEC
 
 
-
-
 // OPCJE
-
+//  ZMIANA CZASU i  ZMIANA TŁA
 btnSettings.addEventListener('click', function () {
     document.querySelector('section.setting').style.zIndex = '1'
 })
@@ -177,7 +179,16 @@ btnSetTime.forEach(function (e) {
         if (this.dataset.breake !== undefined) {
             timeBreake = parseInt(this.dataset.breake)
         }
-
+        if (this.dataset.color !== undefined) {
+            console.log(this.dataset.color)
+            if (this.dataset.color == 1) {
+                document.documentElement.style.setProperty("--main-background-image", "linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%)")
+            } else if (this.dataset.color == 2) {
+                document.documentElement.style.setProperty("--main-background-image", "linear-gradient(0deg, #74EBD5 0%, #9FACE6 100%)")
+            } else if (this.dataset.color == 3) {
+                document.documentElement.style.setProperty("--main-background-image", "linear-gradient(180deg, #21D4FD 0%, #B721FF 100%)")
+            }
+        }
     })
 })
 
