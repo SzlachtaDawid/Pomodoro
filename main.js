@@ -6,11 +6,14 @@ const btnSettings = document.querySelector('button.btnSettings')
 const btnSettingsClose = document.querySelector('i.closeSet')
 const btnSetTime = document.querySelectorAll('.containerset button')
 const svgCircle = document.querySelector('svg circle')
+let now
+let timeStart
+let timeOpen
 
 
 let time
-let timeWork = 1
-let timeBreake = 1
+let timeWork = 25
+let timeBreake = 5
 let breake = false;
 let flaga = false
 let flaga2 = false
@@ -61,6 +64,8 @@ const start = () => {
     time--;
     if (time >= 0) {
         console.log('Timer')
+        now = Date.now()
+        console.log(Date.now())
         timeStarter = false
         timer.style.display = 'block'
         let mins = Math.floor(time / 10 / 60);
@@ -95,7 +100,7 @@ const start = () => {
             divBreake = document.createElement('div')
             document.querySelector('.panel').appendChild(divBreake)
             divBreake.classList.add("add5")
-            divBreake.textContent = 'Dodatkowe 5 minut przerwy'
+            divBreake.textContent = 'Dodatkowa przerwa'
             flaga2 = true
         }
         clearInterval(idI)
@@ -117,6 +122,7 @@ starter.addEventListener('click', startwatch);
 
 const resetf = () => {
     console.log('Reset')
+    timeStart = 0
     timer.textContent = `${timeWork}:00`;
     starter.textContent = 'Start';
     i.style.display = 'none';
@@ -193,3 +199,19 @@ btnSetTime.forEach(function (e) {
 })
 
 // OPCJE KONIEC
+
+// The wake lock sentinel.
+let wakeLock = null;
+
+// Function that attempts to request a wake lock.
+const requestWakeLock = async () => {
+    try {
+        wakeLock = await navigator.wakeLock.request('screen');
+        wakeLock.addEventListener('release', () => {
+            console.log('Wake Lock was released');
+        });
+        console.log('Wake Lock is active');
+    } catch (err) {
+        console.error(`${err.name}, ${err.message}`);
+    }
+};
