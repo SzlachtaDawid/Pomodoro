@@ -7,8 +7,7 @@ const btnSettingsClose = document.querySelector('i.closeSet')
 const btnSetTime = document.querySelectorAll('.containerset button')
 const svgCircle = document.querySelector('svg circle')
 let now
-let timeStart
-let timeOpen
+let timeEnd
 
 
 let time
@@ -22,6 +21,7 @@ let idI;
 let bar
 let bar3
 let timeStarter = true
+let webTab = true
 
 
 
@@ -32,9 +32,12 @@ let timeStarter = true
 
 
 const startwatch = () => {
+    now = Math.floor(Date.now() / 100)
+    timeEnd = Math.floor(now) + time
     if (!breake) {
         console.log('Wystartowanie Pracy')
         time = timeWork * 60 * 10;
+        timeEnd = Math.floor(now) + time
         bar = (880 / time)
         bar3 = 880
         starter.textContent = '';
@@ -44,17 +47,21 @@ const startwatch = () => {
         if (flaga2) {
             divBreake.remove()
         }
+        webTab = true
         idI = setInterval(start, 100);
     }
 
     if (breake) {
         console.log('Wystartowanie Przerwy')
+        time = timeBreake * 60 * 10;
+        timeEnd = Math.floor(now) + time
         bar = (880 / time)
         bar3 = 880
         starter.textContent = '';
         i.style.display = 'none';
         svgCircle.style.strokeDashoffset = 880
         svgCircle.style.animation = `colorBreake ${(timeBreake * 60) + 's'} linear both `;
+        webTab = true
         flaga = true
         idI = setInterval(start, 100);
     }
@@ -64,8 +71,8 @@ const start = () => {
     time--;
     if (time >= 0) {
         console.log('Timer')
-        now = Date.now()
-        console.log(Date.now())
+        now = Math.floor(Date.now() / 100)
+        time = timeEnd - now
         timeStarter = false
         timer.style.display = 'block'
         let mins = Math.floor(time / 10 / 60);
@@ -77,8 +84,11 @@ const start = () => {
             secs = "0" + secs;
         }
         timer.textContent = mins + ":" + secs;
-        bar3 -= bar
-        svgCircle.style.strokeDashoffset = bar3
+        bar3 = (-now) - (-timeEnd)
+        if (webTab) bar4 = 880 / bar3
+        bar5 = bar4 * bar3
+        svgCircle.style.strokeDashoffset = bar5
+        webTab = false
     } else if (time < 0 && !breake) {
         console.log('Zakończenie Pracy')
         timer.style.display = 'none'
@@ -122,6 +132,7 @@ starter.addEventListener('click', startwatch);
 
 const resetf = () => {
     console.log('Reset')
+    webTab = true
     timeStart = 0
     timer.textContent = `${timeWork}:00`;
     starter.textContent = 'Start';
@@ -149,6 +160,7 @@ const breake5min = () => {
     if (active) {
         console.log('Dodatkowa Przerwa')
         time = timeBreake * 60 * 10;
+        timeEnd = Math.floor(now) + time
         starter.textContent = '';
         svgCircle.style.strokeDashoffset = 880
         svgCircle.style.animation = `colorBreake2 ${(timeBreake * 60) + 's'} linear both `;
@@ -199,19 +211,3 @@ btnSetTime.forEach(function (e) {
 })
 
 // OPCJE KONIEC
-
-// The wake lock sentinel.
-let wakeLock = null;
-
-// Function that attempts to request a wake lock.
-const requestWakeLock = async () => {
-    try {
-        wakeLock = await navigator.wakeLock.request('screen');
-        wakeLock.addEventListener('release', () => {
-            console.log('Wake Lock was released');
-        });
-        console.log('Wake Lock is active');
-    } catch (err) {
-        console.error(`${err.name}, ${err.message}`);
-    }
-};
