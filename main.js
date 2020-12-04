@@ -1,3 +1,11 @@
+import NoSleep from 'nosleep.js';
+var noSleep = new NoSleep();
+
+document.addEventListener('click', function enableNoSleep() {
+    document.removeEventListener('click', enableNoSleep, false);
+    noSleep.enable();
+}, false);
+
 const starter = document.querySelector('div.starter')
 const reset = document.querySelector('.reset');
 const timer = document.querySelector('div.timer h2')
@@ -160,7 +168,7 @@ const breake5min = () => {
     if (active) {
         console.log('Dodatkowa Przerwa')
         time = timeBreake * 60 * 10;
-        timeEnd = Math.floor(now) + time
+        timeEnd = Math.floor(Date.now() / 100) + time
         starter.textContent = '';
         svgCircle.style.strokeDashoffset = 880
         svgCircle.style.animation = `colorBreake2 ${(timeBreake * 60) + 's'} linear both `;
