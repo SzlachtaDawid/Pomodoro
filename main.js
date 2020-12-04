@@ -1,4 +1,4 @@
-import NoSleep from 'nosleep.js';
+import './nosleep.js'
 var noSleep = new NoSleep();
 
 document.addEventListener('click', function enableNoSleep() {
