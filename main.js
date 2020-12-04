@@ -1,10 +1,15 @@
-import './nosleep.js'
+// Blokada wygaszania ekranu na Android oraz iOS
+
+import './nosleep.js';
+
 var noSleep = new NoSleep();
 
 document.addEventListener('click', function enableNoSleep() {
     document.removeEventListener('click', enableNoSleep, false);
     noSleep.enable();
 }, false);
+
+// Blokada wygaszania ekranu na Android oraz iOS  ---------> KONIEC KONIEC KONIEC
 
 const starter = document.querySelector('div.starter')
 const reset = document.querySelector('.reset');
@@ -16,6 +21,8 @@ const btnSetTime = document.querySelectorAll('.containerset button')
 const svgCircle = document.querySelector('svg circle')
 let now
 let timeEnd
+let timeStart
+let divBreake
 
 
 let time
@@ -28,6 +35,8 @@ let active
 let idI;
 let bar
 let bar3
+let bar4
+let bar5
 let timeStarter = true
 let webTab = true
 
