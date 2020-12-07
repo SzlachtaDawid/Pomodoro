@@ -21,7 +21,6 @@ const btnSetTime = document.querySelectorAll('.containerset button')
 const svgCircle = document.querySelector('svg circle')
 let now
 let timeEnd
-let timeStart
 let divBreake
 
 
@@ -37,7 +36,6 @@ let bar
 let bar3
 let bar4
 let bar5
-let timeStarter = true
 let webTab = true
 
 
@@ -58,6 +56,7 @@ const startwatch = () => {
         bar = (880 / time)
         bar3 = 880
         starter.textContent = '';
+        starter.style.border = 'none'
         i.style.display = 'none';
         svgCircle.style.strokeDashoffset = 880
         svgCircle.style.animation = `colorWork ${(timeWork * 60) + 's'} linear both`;
@@ -75,6 +74,7 @@ const startwatch = () => {
         bar = (880 / time)
         bar3 = 880
         starter.textContent = '';
+        starter.style.border = 'none'
         i.style.display = 'none';
         svgCircle.style.strokeDashoffset = 880
         svgCircle.style.animation = `colorBreake ${(timeBreake * 60) + 's'} linear both `;
@@ -90,7 +90,6 @@ const start = () => {
         console.log('Timer')
         now = Math.floor(Date.now() / 100)
         time = timeEnd - now
-        timeStarter = false
         timer.style.display = 'block'
         let mins = Math.floor(time / 10 / 60);
         let secs = Math.floor(time / 10 % 60);
@@ -110,6 +109,7 @@ const start = () => {
         console.log('Zakończenie Pracy')
         timer.style.display = 'none'
         starter.textContent = 'Przerwa'
+        starter.style.border = '2px solid white'
         i.style.display = 'block'
         clearInterval(idI)
         breake = true
@@ -120,6 +120,7 @@ const start = () => {
         console.log('Zakończenie Pauzy')
         timer.style.display = 'none'
         starter.textContent = 'Praca'
+        starter.style.border = '2px solid white'
         i.style.display = 'block'
         bar3 = 0
         svgCircle.style.strokeDashoffset = bar3
@@ -128,6 +129,7 @@ const start = () => {
             document.querySelector('.panel').appendChild(divBreake)
             divBreake.classList.add("add5")
             divBreake.textContent = 'Dodatkowa przerwa'
+            divBreake.style.borderBottom = '2px solid red'
             flaga2 = true
         }
         clearInterval(idI)
@@ -150,9 +152,9 @@ starter.addEventListener('click', startwatch);
 const resetf = () => {
     console.log('Reset')
     webTab = true
-    timeStart = 0
     timer.textContent = `${timeWork}:00`;
     starter.textContent = 'Start';
+    starter.style.border = '2px solid white'
     i.style.display = 'none';
     bar3 = 880
     svgCircle.style.strokeDashoffset = bar3
@@ -179,6 +181,7 @@ const breake5min = () => {
         time = timeBreake * 60 * 10;
         timeEnd = Math.floor(Date.now() / 100) + time
         starter.textContent = '';
+        starter.style.border = 'none'
         svgCircle.style.strokeDashoffset = 880
         svgCircle.style.animation = `colorBreake2 ${(timeBreake * 60) + 's'} linear both `;
         i.style.display = 'none';

@@ -23,6 +23,10 @@ body {
     z-index: 2;
 }
 
+button {
+    outline: none;
+}
+
 
 /* TYTUŁ */
 
@@ -32,6 +36,12 @@ body {
     margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
+}
+
+@media (min-width:600px) {
+    .text {
+        font-size: 100px;
+    }
 }
 
 
@@ -98,14 +108,41 @@ svg circle {
 }
 
 .panel div.starter {
-    width: 150px;
+    width: 200px;
     margin: 0 auto;
+    cursor: pointer;
+    border: 2px solid white;
+    border-radius: 10px;
+    transition: 0.2s;
 }
 
+
 .panel div.add5 {
-    margin-top: 10px;
+    margin: 10px auto;
     font-size: 20px;
+    width: 200px;
+    cursor: pointer;
 }
+
+@media (min-width:600px) {
+    .panel {
+        font-size: 50px;
+    }
+
+    .panel div.starter {
+        width: 300px;
+    }
+
+    .panel div.starter:hover {
+        letter-spacing: 5px;
+    }
+
+    .panel div.add5 {
+        font-size: 30px;
+        width: 300px;
+    }
+}
+
 
 /* BUTTONY */
 
@@ -122,6 +159,19 @@ div.buttons button {
     font-size: 30px;
     background: transparent;
     border: none;
+    cursor: pointer;
+}
+
+@media (min-width:600px) {
+
+    div.buttons {
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+
+    div.buttons button {
+        font-size: 50px;
+    }
 }
 
 @keyframes animationbell {
@@ -219,11 +269,13 @@ div.containerset button {
     border: 2px solid white;
     margin: 0 5px;
     font-size: 17px;
+    cursor: pointer;
 }
 
 div.colors button {
     height: 40px;
     width: 60px;
+    cursor: pointer;
 }
 
 div.colors button:nth-of-type(1) {
@@ -245,4 +297,5 @@ section.setting i.closeSet {
     width: 100px;
     font-size: 50px;
     margin: 0 auto;
+    cursor: pointer;
 }
